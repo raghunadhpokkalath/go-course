@@ -22,15 +22,17 @@ func fib(n int) {
 		isPos = false
 	}
 
-	n1 := 1
-	n2 := 0
+	n1, count := 1, 1
+	n2, sum := 0, 0
 	n = int(math.Abs(float64(n)))
-	for i := 1; i <= n; i++ {
-		n1, n2 = n2, n1+n2
-		if !isPos && i%2 == 0 {
-			fmt.Fprintln(out, n2*-1)
+	for count <= n {
+		sum = n1 + n2
+		if !isPos && count%2 == 0 {
+			fmt.Fprintln(out, sum*-1)
 		} else {
-			fmt.Fprintln(out, n2)
+			fmt.Fprintln(out, sum)
 		}
+		n1, n2 = n2, sum
+		count++
 	}
 }
