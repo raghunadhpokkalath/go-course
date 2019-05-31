@@ -12,42 +12,30 @@ func main() {
 	fib(7)
 }
 
-func absolute(n int) (int, bool) {
-	var negative bool
-	if n < 0 {
-		n *= -1
-		negative = true
-	}
-	return n, negative
-}
-
 func fib(n int) {
-	// Cater for fib(0).
-	if n == 0 {
-		fmt.Fprintln(out, 0)
-		return
+	store := map[int]int{
+		0: 0,
 	}
 
-	prev2, prev1 := 1, 0
+	i := 0
+	for i != n {
+		current := 0
 
-	n, nega := absolute(n)
-
-	for i := 0; i < n; i++ {
-		current := prev1 + prev2
-
-		// Protect against integer overflow / out of bounds error.
-		if current < prev1 {
-			fmt.Fprintln(out, "Error: Number overflow")
-			return
-		}
-
-		prev2, prev1 = prev1, current
-
-		// print based on whether negafibonacci was requested or not.
-		if nega && i%2 == 1 {
-			fmt.Fprintln(out, -current)
+		if n < 0 {
+			current = store[i] - store[i-1]
+			if current == 0 {
+				current = 1
+			}
+			store[i-2] = current
+			i--
 		} else {
-			fmt.Fprintln(out, current)
+			current = store[i] + store[i-1]
+			if current == 0 {
+				current = 1
+			}
+			store[i+1] = current
+			i++
 		}
+		fmt.Fprintln(out, current)
 	}
 }
