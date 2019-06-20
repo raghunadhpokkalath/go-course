@@ -15,8 +15,7 @@ func fib(n int) {
 	}
 	for i := 0; i < n*sign; i++ {
 		fmt.Fprintln(out, curr)
-		sum := prev + curr*sign
-		prev, curr = curr, sum
+		prev, curr = curr, prev+curr*sign
 	}
 }
 

@@ -40,5 +40,5 @@ func TestFib(t *testing.T) {
 	}
 }
 func format(data string) string {
-	return strings.Replace(data, " ", "\n", -1)
+	return strings.ReplaceAll(data, " ", "\n")
 }
